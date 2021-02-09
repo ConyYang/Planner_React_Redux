@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+import Plans from './Plans';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component{
+  state = {
+    plans: [
+      {id: 1, content: 'Do CZ3007 Tutorial'},
+      {id: 2, content: 'Discuss MDP with groupmates'}
+    ]
+  }
+  deletePlan = (id)=>{
+    const plans = this.state.plans.filter(plan =>{
+      return plan.id !== id;
+    });
+    this.setState({
+      plans: plans
+    })
+  }
+  render(){
+    return (
+      <div className="plan-app container">
+        <h1 className="center pink-text">Cony's Planner</h1>
+        <Plans plans={this.state.plans} deletePlan={this.deletePlan}></Plans>
+      </div>
+    )
+  }
 }
-
 export default App;
